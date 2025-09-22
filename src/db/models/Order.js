@@ -1,4 +1,3 @@
-
 import { model, Schema } from 'mongoose';
 
 const orderSchema = new Schema(
@@ -16,7 +15,7 @@ const orderSchema = new Schema(
       required: [true, 'Email is required'],
       trim: true,
       maxlength: [100, 'Email too long'],
-      match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Invalid email format'],
+      // match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Invalid email format'],
     },
     phone: {
       type: String,
