@@ -4,7 +4,7 @@ import { getOrder, getOrderById } from '../services/orders.js';
 
 export const addOrderController = async (req, res, next) => {
   try {
-    const { orders, ...formData } = req.body;
+    const { orders, totalPrice, ...formData } = req.body;
 
     if (!orders || orders.length === 0) {
       throw createHttpError(400, 'orders_empty');
@@ -13,6 +13,7 @@ export const addOrderController = async (req, res, next) => {
     const order = await OrderCollection.create({
       ...formData,
       orders,
+      totalPrice,
     });
 
     console.log('Received order data:', req.body);
