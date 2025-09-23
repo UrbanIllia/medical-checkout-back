@@ -105,6 +105,20 @@ const orderSchema = new Schema(
         },
       },
     ],
+    totalPrice: {
+      subTotal: {
+        type: Number,
+        required: [true, 'SubTotal price is required'],
+      },
+      shippingFee: {
+        type: Number,
+        required: [true, 'shippingFee is required'],
+      },
+      total: {
+        type: Number,
+        required: [true, 'Total price is required'],
+      },
+    },
     status: {
       type: String,
       enum: {
@@ -116,6 +130,7 @@ const orderSchema = new Schema(
   },
   {
     timestamps: true,
+    versionKey: false,
   },
 );
 

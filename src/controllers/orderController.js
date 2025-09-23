@@ -1,5 +1,6 @@
 import createHttpError from 'http-errors';
 import OrderCollection from '../db/models/cart.js';
+import { getOrder, getOrderById } from '../services/orders.js';
 
 export const addOrderController = async (req, res, next) => {
   try {
@@ -24,4 +25,24 @@ export const addOrderController = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+export const getOrderController = async (req, res, next) => {
+  const data = await getOrder();
+  res.json({
+    status: 200,
+    message: 'Success you have all orders',
+    data,
+  });
+};
+
+export const getOrderByIdController = async (req, res, next) => {
+  const { id } = req.params;
+  const data = await getOrderById(id);
+  if (!data) throw createHttpError(404, `Order with ${id} not found`);
+  res.json({
+    status: 200,
+    message: 'Everything success. You have your one order',
+    data,
+  });
 };
