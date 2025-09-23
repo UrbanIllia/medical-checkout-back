@@ -35,16 +35,6 @@ export const addOrderController = async (req, res, next) => {
       throw createHttpError(400, 'Orders cannot be empty');
     }
 
-    // Валидация totalPrice
-    // if (
-    //   !totalPrice ||
-    //   typeof totalPrice !== 'object' ||
-    //   totalPrice.subTotal == null ||
-    //   totalPrice.shippingFee == null ||
-    //   totalPrice.total == null
-    // ) {
-    //   throw createHttpError(400, 'Invalid total price data');
-    // }
     console.log('🟠 BACKEND - DATA TO SAVE:', {
       ...formData,
       orders,
@@ -60,16 +50,6 @@ export const addOrderController = async (req, res, next) => {
       },
     });
     console.log('🔵 BACKEND - MONGO CREATED ORDER:', order);
-    // console.log('Saved order:', order);
-
-    // console.log('Received order data:', {
-    //   orderId: order._id,
-    //   email: formData.email,
-    //   ordersCount: orders.length,
-    //   totalPrice: totalPrice.subTotal,
-    //   shippingFee: totalPrice.shippingFee,
-    //   total: totalPrice.total,
-    // });
 
     res.status(201).json({
       status: 201,
