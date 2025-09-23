@@ -43,11 +43,7 @@ export const addOrderController = async (req, res, next) => {
     const order = await OrderCollection.create({
       ...formData,
       orders,
-      totalPrice: {
-        subTotal: totalPrice.subTotal,
-        shippingFee: totalPrice.shippingFee,
-        total: totalPrice.total,
-      },
+      totalPrice,
     });
     console.log('🔵 BACKEND - MONGO CREATED ORDER:', order);
 
