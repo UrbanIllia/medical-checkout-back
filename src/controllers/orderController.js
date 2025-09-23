@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors';
-import OrderCollection from '../db/models/order.js';
+import OrderCollection from '../db/models/cart.js';
 
 export const addOrderController = async (req, res, next) => {
   try {
