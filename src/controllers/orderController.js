@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors';
-import OrderCollection from '../db/models/cart.js';
+import OrderCollection from '../db/models/order.js';
 import { getOrder, getOrderById } from '../services/orders.js';
 
 // export const addOrderController = async (req, res, next) => {
@@ -28,24 +28,28 @@ import { getOrder, getOrderById } from '../services/orders.js';
 //   }
 // };
 export const addOrderController = async (req, res, next) => {
+  console.log('🟡 BACKEND - RAW REQ.BODY:', req.body);
   try {
     const { orders, totalPrice, ...formData } = req.body;
-
     if (!orders || orders.length === 0) {
       throw createHttpError(400, 'Orders cannot be empty');
     }
 
     // Валидация totalPrice
-    if (
-      !totalPrice ||
-      typeof totalPrice !== 'object' ||
-      totalPrice.subTotal == null ||
-      totalPrice.shippingFee == null ||
-      totalPrice.total == null
-    ) {
-      throw createHttpError(400, 'Invalid total price data');
-    }
-
+    // if (
+    //   !totalPrice ||
+    //   typeof totalPrice !== 'object' ||
+    //   totalPrice.subTotal == null ||
+    //   totalPrice.shippingFee == null ||
+    //   totalPrice.total == null
+    // ) {
+    //   throw createHttpError(400, 'Invalid total price data');
+    // }
+    console.log('🟠 BACKEND - DATA TO SAVE:', {
+      ...formData,
+      orders,
+      totalPrice,
+    });
     const order = await OrderCollection.create({
       ...formData,
       orders,
@@ -55,15 +59,17 @@ export const addOrderController = async (req, res, next) => {
         total: totalPrice.total,
       },
     });
+    console.log('🔵 BACKEND - MONGO CREATED ORDER:', order);
+    // console.log('Saved order:', order);
 
-    console.log('Received order data:', {
-      orderId: order._id,
-      email: formData.email,
-      ordersCount: orders.length,
-      totalPrice: totalPrice.subTotal,
-      shippingFee: totalPrice.shippingFee,
-      total: totalPrice.total,
-    });
+    // console.log('Received order data:', {
+    //   orderId: order._id,
+    //   email: formData.email,
+    //   ordersCount: orders.length,
+    //   totalPrice: totalPrice.subTotal,
+    //   shippingFee: totalPrice.shippingFee,
+    //   total: totalPrice.total,
+    // });
 
     res.status(201).json({
       status: 201,

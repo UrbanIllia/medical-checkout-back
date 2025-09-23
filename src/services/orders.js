@@ -1,4 +1,4 @@
-import OrderCollection from '../db/models/cart.js';
+import OrderCollection from '../db/models/order.js';
 
 export const addOrder = (payload) => OrderCollection.create(payload);
 
