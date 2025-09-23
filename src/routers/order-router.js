@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { addOrderController } from '../controllers/orderController.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+import { addOrderController } from '../controllers/orderController.js';
 
 const OrderRouter = Router();
 

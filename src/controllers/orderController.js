@@ -1,11 +1,3 @@
-// import OrderCollection from '../db/models/order.js';
-
-// export const addOrderController = async (req, res) => {
-//   const data = await OrderCollection.create(req.body);
-//   console.log(req.body);
-//   res.status(201).json(data);
-// };
-// src/controllers/orderController.js
 import createHttpError from 'http-errors';
 import OrderCollection from '../db/models/order.js';
 
