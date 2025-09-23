@@ -1,4 +1,4 @@
-import { initMongodbConnection } from './db/initMongodbConnection.js';
+import { initMongodbConnection } from './src/db/initMongodbConnection.js';
 import { startServer } from './server.js';
 // u77*huy4A*rDx4U Urban
 

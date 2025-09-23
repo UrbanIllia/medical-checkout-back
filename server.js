@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
-import { logger } from './midlewares/logger.js';
-import { errorHandler } from './midlewares/errorHandler.js';
-import { notFoundHandler } from './midlewares/notFoundHandler.js';
-import OrderRouter from './routers/order-router.js';
+import { logger } from './src/midlewares/logger.js';
+import { errorHandler } from './src/midlewares/errorHandler.js';
+import { notFoundHandler } from './src/midlewares/notFoundHandler.js';
+import OrderRouter from './src/routers/order-router.js';
 
 export const startServer = () => {
   const app = express();
