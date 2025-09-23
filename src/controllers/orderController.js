@@ -3,25 +3,16 @@ import OrderCollection from '../db/models/order.js';
 import { getOrder, getOrderById } from '../services/orders.js';
 
 export const addOrderController = async (req, res, next) => {
-  console.log('🟡 BACKEND - RAW REQ.BODY:', req.body);
   try {
     const { orders, totalPrice, ...formData } = req.body;
     if (!orders || orders.length === 0) {
       throw createHttpError(400, 'Orders cannot be empty');
     }
-
-    console.log('🟠 BACKEND - DATA TO SAVE:', {
-      ...formData,
-      orders,
-      totalPrice,
-    });
     const order = await OrderCollection.create({
       ...formData,
       orders,
       totalPrice,
     });
-    console.log('🔵 BACKEND - MONGO CREATED ORDER:', order);
-
     res.status(201).json({
       status: 201,
       message: 'Order created successfully',
@@ -38,7 +29,7 @@ export const addOrderController = async (req, res, next) => {
   }
 };
 
-export const getOrderController = async (req, res, next) => {
+export const getOrderController = async (req, res) => {
   const data = await getOrder();
   res.json({
     status: 200,
@@ -47,7 +38,7 @@ export const getOrderController = async (req, res, next) => {
   });
 };
 
-export const getOrderByIdController = async (req, res, next) => {
+export const getOrderByIdController = async (req, res) => {
   const { id } = req.params;
   const data = await getOrderById(id);
   if (!data) throw createHttpError(404, `Order with ${id} not found`);
